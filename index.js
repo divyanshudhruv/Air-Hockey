@@ -1,4 +1,4 @@
-var board = document.getElementById("canvas"),
+let board = document.getElementById("canvas"),
 		boardContext = board.getContext('2d'),
 		boardWidth = 770,
 		boardHeight = 520,
@@ -112,10 +112,10 @@ function Disc() {
 		this.discCollision = function() {
 
 				// Loop over two controllers to see if puck has come in contact
-				for (var i = 0; i < controllers.length; i++) {
+				for (let i = 0; i < controllers.length; i++) {
 					
 						// Minus the x pos of one disc from the x pos of the other disc
-						var distanceX = this.x - controllers[i].x,
+						let distanceX = this.x - controllers[i].x,
 								// Minus the y pos of one disc from the y pos of the other disc
 								distanceY = this.y - controllers[i].y,
 								// Multiply each of the distances by this
@@ -131,7 +131,7 @@ function Disc() {
 								// Had help from Reddit user Kraft_Punk on the below collision math
 							
 								//calculate angle, sine, and cosine
-								var angle = Math.atan2(distanceY, distanceX),
+								let angle = Math.atan2(distanceY, distanceX),
 										sin = Math.sin(angle),
 										cos = Math.cos(angle),
 										//rotate controllers[i]'s position
@@ -153,14 +153,14 @@ function Disc() {
 								vel1.x = velocityXTotal + vel0.x;
 
 								//update position - to avoid objects becoming stuck together
-								var absV = Math.abs(vel0.x) + Math.abs(vel1.x),
+								let absV = Math.abs(vel0.x) + Math.abs(vel1.x),
 										overlap = (controllers[i].radius + this.radius) - Math.abs(pos0.x - pos1.x);
 
 								pos0.x += vel0.x / absV * overlap;
 								pos1.x += vel1.x / absV * overlap;
 
 								//rotate positions back
-								var pos0F = rotate(pos0.x, pos0.y, sin, cos, false),
+								let pos0F = rotate(pos0.x, pos0.y, sin, cos, false),
 										pos1F = rotate(pos1.x, pos1.y, sin, cos, false);
 
 								//adjust positions to actual screen positions
@@ -170,7 +170,7 @@ function Disc() {
 								controllers[i].y = controllers[i].y + pos0F.y;
 
 								//rotate velocities back
-								var vel0F = rotate(vel0.x, vel0.y, sin, cos, false),
+								let vel0F = rotate(vel0.x, vel0.y, sin, cos, false),
 										vel1F = rotate(vel1.x, vel1.y, sin, cos, false);
 
 								controllers[i].velocityX = vel0F.x;
@@ -316,10 +316,10 @@ document.addEventListener("keydown", function(e) {
 });
 
 // Add puck
-var puck = new Disc();
+let puck = new Disc();
 
 // Add controller & adjust settings
-var controller = new Disc();
+let controller = new Disc();
 controller.color = '#2132CC';
 controller.radius += 10;
 controller.acceleration = 5;
@@ -328,7 +328,7 @@ controller.mass = 50;
 controller.x = controller.startingPosX;
 
 // Add controller two
-var controllerTwo = new Disc();
+let controllerTwo = new Disc();
 controllerTwo.color = '#2132CC';
 controllerTwo.radius += 10;
 controllerTwo.mass = 50;
